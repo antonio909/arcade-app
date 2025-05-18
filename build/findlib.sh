@@ -21,3 +21,18 @@ for DIR in $LIBDIRS; do
                 if [ x"$BIT" == x"64" -a -z "$BUILD" ]; then
                         continue;
                 fi
+
+                BUILD=`file -L "$DIR/$1" | grep 32-bit`
+
+                #check to see if 32 bit lib
+                if [ x"$BIT" == x"32" -a -z "$BUILD" ]; then
+                        continue;
+                fi
+
+                echo "$DIR/$1"
+                exit 0
+        fi
+done
+
+echo ""
+exit -1
